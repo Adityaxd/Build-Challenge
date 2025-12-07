@@ -626,5 +626,4 @@ This README documents the structure, how to run the code, design choices, and te
 * USA Banking Transactions Dataset (2023-2024), Kaggle.
 * Various open-source Java projects and documentation for stream and testing patterns.
 * Stack Overflow discussions for clarifying Java stream and concurrency edge cases.
-* General Java documentation and guides (Oracle Docs, official tutorials, etc.).
-
+* General Java documentation and guides (Oracle Docs, official tutorials).
