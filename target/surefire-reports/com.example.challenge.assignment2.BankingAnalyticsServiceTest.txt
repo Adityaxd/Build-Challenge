@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.challenge.assignment2.BankingAnalyticsServiceTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.example.challenge.assignment2.BankingAnalyticsServiceTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in com.example.challenge.assignment2.BankingAnalyticsServiceTest

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.018" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.022" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire/surefirebooter-20251206193906405_3.jar /Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire 2025-12-06T19-39-06_365-jvmRun1 surefire-20251206193906405_1tmp surefire_0-20251206193906405_2tmp"/>
+    <property name="sun.java.command" value="/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire/surefirebooter-20251206200516415_3.jar /Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire 2025-12-06T20-05-16_365-jvmRun1 surefire-20251206200516415_1tmp surefire_0-20251206200516415_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/test-classes:/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/classes:/Users/adityachaudhary/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/Users/adityachaudhary/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/adityachaudhary/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/adityachaudhary/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/adityachaudhary/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/adityachaudhary/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/Users/adityachaudhary/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/adityachaudhary/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/Users/adityachaudhary/.m2/repository/org/apache/commons/commons-csv/1.11.0/commons-csv-1.11.0.jar:/Users/adityachaudhary/.m2/repository/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar:/Users/adityachaudhary/.m2/repository/commons-codec/commons-codec/1.16.1/commons-codec-1.16.1.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire/surefirebooter-20251206193906405_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/adityachaudhary/Documents/GitHub/Build-Challenge/target/surefire/surefirebooter-20251206200516415_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="25.0.1"/>
@@ -59,14 +59,14 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="totalAmountByCategory_sumsCorrectly" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.004"/>
-  <testcase name="largestTransaction_returnsNullForEmptyList" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
-  <testcase name="totalFraudulentAmount_sumsOnlyFraudulentTransactions" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.003"/>
+  <testcase name="totalAmountByCategory_sumsCorrectly" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.005"/>
+  <testcase name="largestTransaction_returnsNullForEmptyList" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
+  <testcase name="totalFraudulentAmount_sumsOnlyFraudulentTransactions" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
   <testcase name="largestTransaction_returnsTransactionWithMaxAmount" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
   <testcase name="topMerchantsByTotalAmount_handlesRequestLargerThanMerchantCount" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
-  <testcase name="averageAmountByAgeBand_groupsIntoCorrectBands" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
+  <testcase name="averageAmountByAgeBand_groupsIntoCorrectBands" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
   <testcase name="topMerchantsByTotalAmount_returnsSortedDescending" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
   <testcase name="totalFraudulentAmount_isZeroWhenNoFraudulentTransactions" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.0"/>
   <testcase name="totalAmountByPaymentMethod_sumsCorrectly" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.0"/>
-  <testcase name="averageAmountByAgeBand_putsInvalidAgesIntoUnknownBand" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
+  <testcase name="averageAmountByAgeBand_putsInvalidAgesIntoUnknownBand" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.0"/>
 </testsuite>

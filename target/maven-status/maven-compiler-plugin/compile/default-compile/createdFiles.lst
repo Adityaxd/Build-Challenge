@@ -1,4 +1,8 @@
+com/example/challenge/assignment2/BankingAnalyticsApp.class
 com/example/challenge/assignment1/BoundedBlockingQueue.class
+com/example/challenge/assignment2/BankingAnalyticsService.class
+com/example/challenge/assignment2/BankTransactionRepository.class
+com/example/challenge/assignment2/BankTransaction.class
 com/example/challenge/assignment1/Producer.class
 com/example/challenge/assignment1/Consumer.class
 com/example/challenge/assignment1/ProducerConsumerDemo.class
