@@ -122,4 +122,16 @@ class ProducerConsumerTest {
         assertEquals(1, resultHolder.size());
         assertEquals(42, resultHolder.get(0));
     }
+    // Additional test for constructor validation
+    @Test
+void constructorThrowsOnNonPositiveCapacity() {
+    assertThrows(IllegalArgumentException.class,
+            () -> new BoundedBlockingQueue<Integer>(0));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> new BoundedBlockingQueue<Integer>(-5));
+}
+
+
+
 }

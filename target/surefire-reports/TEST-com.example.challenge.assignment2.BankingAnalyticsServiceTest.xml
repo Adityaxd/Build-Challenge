@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.challenge.assignment1.ProducerConsumerTest" time="0.23" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.027" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -59,9 +59,14 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="allItemsMoveFromSourceToDestination" classname="com.example.challenge.assignment1.ProducerConsumerTest" time="0.01"/>
-  <testcase name="constructorThrowsOnNonPositiveCapacity" classname="com.example.challenge.assignment1.ProducerConsumerTest" time="0.002"/>
-  <testcase name="constructorRejectsNonPositiveCapacity" classname="com.example.challenge.assignment1.ProducerConsumerTest" time="0.001"/>
-  <testcase name="takeBlocksWhenQueueIsEmptyUntilElementIsAvailable" classname="com.example.challenge.assignment1.ProducerConsumerTest" time="0.103"/>
-  <testcase name="putBlocksWhenQueueIsFullUntilSpaceIsFreed" classname="com.example.challenge.assignment1.ProducerConsumerTest" time="0.106"/>
+  <testcase name="totalAmountByCategory_sumsCorrectly" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.008"/>
+  <testcase name="largestTransaction_returnsNullForEmptyList" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
+  <testcase name="totalFraudulentAmount_sumsOnlyFraudulentTransactions" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.003"/>
+  <testcase name="largestTransaction_returnsTransactionWithMaxAmount" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
+  <testcase name="topMerchantsByTotalAmount_handlesRequestLargerThanMerchantCount" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.003"/>
+  <testcase name="averageAmountByAgeBand_groupsIntoCorrectBands" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
+  <testcase name="topMerchantsByTotalAmount_returnsSortedDescending" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.001"/>
+  <testcase name="totalFraudulentAmount_isZeroWhenNoFraudulentTransactions" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.0"/>
+  <testcase name="totalAmountByPaymentMethod_sumsCorrectly" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.002"/>
+  <testcase name="averageAmountByAgeBand_putsInvalidAgesIntoUnknownBand" classname="com.example.challenge.assignment2.BankingAnalyticsServiceTest" time="0.0"/>
 </testsuite>
