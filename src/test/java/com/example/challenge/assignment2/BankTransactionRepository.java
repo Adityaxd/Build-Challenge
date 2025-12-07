@@ -1,20 +1,26 @@
 package com.example.challenge.assignment2;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
- * Repository class to load bank transaction data from a CSV file.
+ * Repository responsible for loading BankTransaction data from a CSV file.
+ * Uses Apache Commons CSV to correctly handle quoted fields and commas.
  */
 public class BankTransactionRepository {
 
-    // Column name constants
+    // Column name constants (must match the CSV header exactly)
     private static final String COL_TRANSACTION_ID = "Transaction_ID";
     private static final String COL_TRANSACTION_DATE = "Transaction_Date";
     private static final String COL_TRANSACTION_AMOUNT = "Transaction_Amount";
@@ -44,84 +50,56 @@ public class BankTransactionRepository {
         this.csvPath = Objects.requireNonNull(csvPath, "CSV path must not be null");
     }
 
-    // Load all data from CSV file
+    // Loads all bank transactions from the CSV file.
     public List<BankTransaction> findAll() {
-        try (Stream<String> lines = Files.lines(csvPath)) {
-            List<String> allLines = lines
-                    .filter(line -> !line.isBlank())
-                    .collect(Collectors.toList());
+        try (Reader reader = Files.newBufferedReader(csvPath);
+             CSVParser parser = new CSVParser(reader,
+                     CSVFormat.DEFAULT
+                             .withFirstRecordAsHeader()
+                             .withTrim()
+                             .withIgnoreEmptyLines())) {
 
-            if (allLines.isEmpty()) {
-                return List.of();
+            List<BankTransaction> result = new ArrayList<>();
+
+            for (CSVRecord record : parser) {
+                result.add(toTransaction(record));
             }
 
-            String headerLine = allLines.get(0);
-            String[] headerColumns = headerLine.split(",", -1);
-            Map<String, Integer> columnIndex = buildColumnIndex(headerColumns);
+            return result;
 
-            return allLines.stream()
-                    .skip(1) // Skip header line
-                    .map(line -> toTransaction(line, columnIndex))
-                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Failed to read CSV file: " + csvPath, e);
         }
     }
+    // Converts a CSVRecord to a BankTransaction object.
+    private BankTransaction toTransaction(CSVRecord record) {
+        String id = record.get(COL_TRANSACTION_ID);
 
-    // Build a map of column names to their indices
-    private Map<String, Integer> buildColumnIndex(String[] headerColumns) {
-        Map<String, Integer> index = new HashMap<>();
-        for (int i = 0; i < headerColumns.length; i++) {
-            index.put(headerColumns[i].trim(), i);
-        }
-        required(index, COL_TRANSACTION_ID);
-        required(index, COL_TRANSACTION_DATE);
-        required(index, COL_TRANSACTION_AMOUNT);
-        required(index, COL_CATEGORY);
-        required(index, COL_PAYMENT_METHOD);
-        required(index, COL_CITY);
-        return index;
-    }
-
-    private void required(Map<String, Integer> index, String columnName) {
-        if (!index.containsKey(columnName)) {
-            throw new IllegalArgumentException(
-                    "Missing required column: " + columnName + " in CSV file: " + csvPath);
-        }
-    }
-
-
-    // Convert a CSV line to a BankTransaction object
-    private BankTransaction toTransaction(String line, Map<String, Integer> columnIndex) {
-        String[] columns = line.split(",", -1);
-
-        String id = value(columns, columnIndex, COL_TRANSACTION_ID);
-        String dateRaw = value(columns, columnIndex, COL_TRANSACTION_DATE);
+        String dateRaw = record.get(COL_TRANSACTION_DATE);
         LocalDateTime dateTime = LocalDateTime.parse(dateRaw, DATE_TIME_FORMATTER);
 
-        double amount = parseDouble(value(columns, columnIndex, COL_TRANSACTION_AMOUNT));
-        String type = value(columns, columnIndex, COL_TRANSACTION_TYPE);
+        double amount = parseDouble(record.get(COL_TRANSACTION_AMOUNT));
+        String type = record.get(COL_TRANSACTION_TYPE);
 
-        int age = parseIntOrDefault(value(columns, columnIndex, COL_CUSTOMER_AGE), 0);
-        String gender = value(columns, columnIndex, COL_CUSTOMER_GENDER);
-        double income = parseDoubleOrDefault(value(columns, columnIndex, COL_CUSTOMER_INCOME), 0.0);
-        double balance = parseDoubleOrDefault(value(columns, columnIndex, COL_ACCOUNT_BALANCE), 0.0);
+        int age = parseIntOrDefault(record.get(COL_CUSTOMER_AGE), 0);
+        String gender = record.get(COL_CUSTOMER_GENDER);
+        double income = parseDoubleOrDefault(record.get(COL_CUSTOMER_INCOME), 0.0);
+        double balance = parseDoubleOrDefault(record.get(COL_ACCOUNT_BALANCE), 0.0);
 
-        String category = value(columns, columnIndex, COL_CATEGORY);
-        String merchant = value(columns, columnIndex, COL_MERCHANT_NAME);
-        String paymentMethod = value(columns, columnIndex, COL_PAYMENT_METHOD);
-        String city = value(columns, columnIndex, COL_CITY);
+        String category = record.get(COL_CATEGORY);
+        String merchant = record.get(COL_MERCHANT_NAME);
+        String paymentMethod = record.get(COL_PAYMENT_METHOD);
+        String city = record.get(COL_CITY);
 
-        String fraudRaw = value(columns, columnIndex, COL_FRAUD_FLAG);
-        boolean fraudulent = "yes".equalsIgnoreCase(fraudRaw.trim());
+        String fraudRaw = record.get(COL_FRAUD_FLAG);
+        boolean fraudulent = fraudRaw != null && fraudRaw.trim().equalsIgnoreCase("yes");
 
-        String status = value(columns, columnIndex, COL_TRANSACTION_STATUS);
+        String status = record.get(COL_TRANSACTION_STATUS);
 
-        int loyaltyPoints = parseIntOrDefault(
-                value(columns, columnIndex, COL_LOYALTY_POINTS), 0);
+        int loyaltyPoints = parseIntOrDefault(record.get(COL_LOYALTY_POINTS), 0);
 
-        String discountRaw = value(columns, columnIndex, COL_DISCOUNT_APPLIED);
-        boolean discountApplied = "yes".equalsIgnoreCase(discountRaw.trim());
+        String discountRaw = record.get(COL_DISCOUNT_APPLIED);
+        boolean discountApplied = discountRaw != null && discountRaw.trim().equalsIgnoreCase("yes");
 
         // Create and return the BankTransaction object
         return new BankTransaction(
@@ -144,23 +122,10 @@ public class BankTransactionRepository {
         );
     }
 
-
-    // Helper methods to extract and parse values from columns
-    // Extract value from columns based on column name
-    private String value(String[] columns, Map<String, Integer> index, String colName) {
-        Integer idx = index.get(colName);
-        if (idx == null || idx < 0 || idx >= columns.length) {
-            return "";
-        }
-        return columns[idx].trim();
-    }
-
-    // Parse double value from string
     private double parseDouble(String raw) {
         return Double.parseDouble(raw.trim());
     }
-
-    // Parse double value with default
+    // Parses a double value from a string, returning a default if parsing fails.
     private double parseDoubleOrDefault(String raw, double defaultValue) {
         if (raw == null || raw.isBlank()) {
             return defaultValue;
@@ -171,8 +136,7 @@ public class BankTransactionRepository {
             return defaultValue;
         }
     }
-
-    // Parse integer value with default
+    // Parses an integer value from a string, returning a default if parsing fails. 
     private int parseIntOrDefault(String raw, int defaultValue) {
         if (raw == null || raw.isBlank()) {
             return defaultValue;

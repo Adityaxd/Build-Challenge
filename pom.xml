@@ -23,6 +23,12 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-csv</artifactId>
+        <version>1.11.0</version>
+    </dependency>
     </dependencies>
 
     <build>
