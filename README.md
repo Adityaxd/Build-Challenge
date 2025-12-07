@@ -97,15 +97,19 @@ target/build-challenge-1.0-SNAPSHOT.jar
 ### 3. Run Assignment 1 demo (Producer–Consumer)
 
 ```bash
-java -cp target/build-challenge-1.0-SNAPSHOT.jar \
-  com.example.challenge.assignment1.ProducerConsumerDemo
+mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment1.ProducerConsumerDemo"
 ```
 
-Example output:
+Console Output :
 
 ```text
-Source data     : [1, 2, 3, 4, 5, 6, 7, 8, 9]
-Destination data: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+(base) adityachaudhary@Adityas-MacBook-Pro Build-Challenge % mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment1.ProducerConsumerDemo"
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+Source data : [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Destination data : [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 This shows that every produced item went through the queue and was consumed in order.
@@ -115,51 +119,89 @@ This shows that every produced item went through the queue and was consumed in o
 ### 4. Run Assignment 2 app (Banking Analytics)
 
 ```bash
-java -cp target/build-challenge-1.0-SNAPSHOT.jar \
-  com.example.challenge.assignment2.BankingAnalyticsApp
+mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment2.BankingAnalyticsApp"
 ```
 
 This:
 
 * Loads `data/bankTransactionsDataset.csv`
 * Runs several stream-based analytics
-* Prints formatted summaries such as:
+* Prints formatted summaries
 
+Console Output : 
 ```text
+(base) adityachaudhary@Adityas-MacBook-Pro Build-Challenge % mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment2.BankingAnalyticsApp" 
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+
 Banking Analytics Application Started
 
 Total transactions loaded : 5389
 
-=== Total Amount by Category ===
+**** Total Amount by Category ****
 Utilities       -> 1034864.54
 Entertainment   -> 1018851.08
-...
+Travel          -> 1018769.19
+Clothing        -> 1002296.46
+Education       ->  976638.69
+Savings         ->  975966.06
+Food            ->  970899.38
+Grocery         ->  969204.60
+Electronics     ->  968512.79
+Shopping        ->  953571.06
+Transport       ->  933981.95
+Fitness         ->  929285.71
+Healthcare      ->  891299.06
+Housing         ->  853413.97
 
-=== Total Amount by City ===
+**** Total Amount by City ****
 Chicago         -> 1463028.14
-...
+San Jose        -> 1435622.81
+Los Angeles     -> 1424179.66
+Dallas          -> 1382739.67
+San Antonio     -> 1381909.27
+New York        -> 1368804.35
+Philadelphia    -> 1290232.27
+Houston         -> 1284925.18
+Phoenix         -> 1264166.46
+San Diego       -> 1201946.73
 
-=== Total Amount by Payment Method ===
+**** Total Amount by Payment Method ****
 E-Wallet        -> 2784491.51
-...
+Credit Card     -> 2783058.42
+Debit Card      -> 2768562.71
+Online Transfer -> 2609528.10
+Cash            -> 2551913.80
 
-=== Total Fraudulent Amount ===
+**** Total Fraudulent Amount ****
 Fraudulent total: 6661043.01
 
-=== Largest Transaction ===
-BankTransaction{...}
+**** Largest Transaction ****
+BankTransaction{transactionId='1d181ee9-86ad-4a8c-abc4-123ebde13c1b', transactionDate=2023-03-02T08:27:27, transactionAmount=4999.54, transactionType='Credit', customerAge=47, customerGender='Female', customerIncome=71126.56, accountBalance=14116.47, category='Grocery', merchantName='Wong, Brooks and Jackson', paymentMethod='Online Transfer', city='Dallas', fraudulent=false, transactionStatus='Pending', loyaltyPointsEarned=101, discountApplied=false}
 
-=== Top 5 Merchants by Total Amount ===
+**** Top 5 Merchants by Total Amount ****
 Merchant: Smith LLC                 Total Amount: 35652.58
-...
+Merchant: Smith PLC                 Total Amount: 32319.57
+Merchant: Brown Inc                 Total Amount: 27394.78
+Merchant: Johnson Group             Total Amount: 20319.18
+Merchant: Smith Inc                 Total Amount: 18697.00
 
-=== Average Amount by Age Band ===
+**** Average Amount by Age Band ****
 50+             ->    2514.21
 26-35           ->    2511.17
 36-50           ->    2509.36
 18-25           ->    2463.52
+
 ```
 
+### Run commands using Maven exec plugin
+
+```bash
+mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment1.ProducerConsumerDemo"
+mvn -q exec:java -Dexec.mainClass="com.example.challenge.assignment2.BankingAnalyticsApp"
+```
 ---
 
 ## Assignment 1 – Producer–Consumer with Bounded Blocking Queue
