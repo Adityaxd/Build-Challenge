@@ -9,17 +9,23 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the ProducerConsumer implementation.
- * Tests include:
- * 1. Constructor validation for non-positive capacity
- * 2. Ensuring all items from source are moved to destination
- * 3. Blocking behavior of put() when queue is full
- * 4. Blocking behavior of take() when queue is empty
+ * Unit tests for the Producer–Consumer implementation.
+ *
+ * This test suite verifies:
+ * 1. Constructor validation for non-positive queue capacity
+ * 2. End-to-end flow where all items move from source to destination in order
+ * 3. Blocking behavior of put() when the queue is full until space is freed
+ * 4. Blocking behavior of take() when the queue is empty until an element is
+ * available
+ *
+ * These cases ensure the correctness and edge case handling of the bounded
+ * blocking queue,
+ * producer, and consumer implementation.
  */
 
 class ProducerConsumerTest {
 
-    // Test for constructor validation
+    // Ensures the queue constructor rejects zero or negative capacity values.
     @Test
     void constructorRejectsNonPositiveCapacity() {
         assertThrows(IllegalArgumentException.class,
@@ -29,6 +35,8 @@ class ProducerConsumerTest {
                 () -> new BoundedBlockingQueue<Integer>(-5));
     }
 
+    // Verifies that all items move from source to destination in order via producer
+    // and consumer.
     @Test
     void allItemsMoveFromSourceToDestination() throws InterruptedException {
         List<Integer> source = Arrays.asList(10, 20, 30, 40, 50);
@@ -49,7 +57,8 @@ class ProducerConsumerTest {
         assertEquals(source, destination);
     }
 
-    // Test for put() blocking behavior
+    // Verifies that put() blocks when the queue is full and only proceeds after
+    // space is freed.
     @Test
     void putBlocksWhenQueueIsFullUntilSpaceIsFreed() throws InterruptedException {
         BoundedBlockingQueue<Integer> queue = new BoundedBlockingQueue<>(1);
@@ -78,7 +87,7 @@ class ProducerConsumerTest {
         Integer first = queue.take();
         assertEquals(1, first);
 
-        // After unblocking, the producer should finish 
+        // After unblocking, the producer should finish
         producer.join(500);
 
         assertFalse(producer.isAlive(), "Producer should finish after space is freed");
@@ -88,7 +97,8 @@ class ProducerConsumerTest {
         assertEquals(2, second);
     }
 
-    // Test for take() blocking behavior
+    // Verifies that take() blocks when the queue is empty and resumes once an
+    // element is available.
     @Test
     void takeBlocksWhenQueueIsEmptyUntilElementIsAvailable() throws InterruptedException {
         BoundedBlockingQueue<Integer> queue = new BoundedBlockingQueue<>(1);
@@ -122,16 +132,4 @@ class ProducerConsumerTest {
         assertEquals(1, resultHolder.size());
         assertEquals(42, resultHolder.get(0));
     }
-    // Additional test for constructor validation
-    @Test
-void constructorThrowsOnNonPositiveCapacity() {
-    assertThrows(IllegalArgumentException.class,
-            () -> new BoundedBlockingQueue<Integer>(0));
-
-    assertThrows(IllegalArgumentException.class,
-            () -> new BoundedBlockingQueue<Integer>(-5));
-}
-
-
-
 }
